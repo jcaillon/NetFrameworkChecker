@@ -19,6 +19,10 @@ namespace NetFrameworkChecker {
 
         private static List<string> _versions;
 
+        public static void RefreshVersionList() {
+            _versions = null;
+        }
+
         /// <summary>
         /// Get the url where to download the .net installer
         /// </summary>
@@ -176,6 +180,18 @@ namespace NetFrameworkChecker {
                 foreach (var split in distantVersion.TrimStart('v').Split('.')) {
                     splitDistant.Add(int.Parse(split.Trim()));
                 }
+
+                for (int j = splitLocal.Count - 1; j >= 0; j--) {
+                    if (splitLocal[j] == 0) {
+                        splitLocal.RemoveAt(j);
+                    }
+                }
+
+                for (int j = splitDistant.Count - 1; j >= 0; j--) {
+                    if (splitDistant[j] == 0) {
+                        splitDistant.RemoveAt(j);
+                    }
+                }
                 var i = 0;
                 while (i <= (splitLocal.Count - 1) && i <= (splitDistant.Count - 1)) {
                     if (splitLocal[i] > splitDistant[i])
@@ -184,19 +200,9 @@ namespace NetFrameworkChecker {
                         return false;
                     i++;
                 }
-
-                var sumLocal = 0;
-                foreach (var val in splitLocal) {
-                    sumLocal += val;
-                }
-                var sumDistant = 0;
-                foreach (var val in splitDistant) {
-                    sumLocal += val;
-                }
-
-                if (sumLocal == sumDistant && trueIfEqual)
+                if (splitLocal.Count == splitDistant.Count && trueIfEqual)
                     return true;
-                if (sumLocal > sumDistant)
+                if (splitLocal.Count > splitDistant.Count)
                     return true;
             } catch (Exception) {
                 // would happen if the input strings are incorrect

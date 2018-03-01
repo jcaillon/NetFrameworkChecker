@@ -1,26 +1,48 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
+using System.Net;
 using System.Windows.Forms;
+
+
 
 namespace NetFrameworkChecker {
     public partial class Application : Form {
+        private Timer _timer;
+        private NetFrameworkInstaller _installer;
+
         public Application() {
             InitializeComponent();
         }
 
         protected override void OnShown(EventArgs e) {
+            downloadBar.Hide();
+            downloadPercent.Hide();
+            
+            RefreshUi();
+            _timer = new Timer {
+                Interval = 1000
+            };
+            _timer.Tick += (sender, args) => RefreshUi();
+            _timer.Start();
+            
             base.OnShown(e);
+        }
 
+        private void RefreshUi() {
             Text = (!string.IsNullOrEmpty(Start.InitialApplicationName) ? Start.InitialApplicationName + " - " : "") + @".NET framework checker";
 
-            var available = NetFrameworkVersion.IsVersionAvailable(Start.VersionNeeded);
+            NetFrameworkVersion.RefreshVersionList();
+
+            NetVersionAvailable = NetFrameworkVersion.IsVersionAvailable(Start.VersionNeeded);
 
             neededVersion.Text = Start.VersionNeeded;
             
-            checkBoxInstalled.Text = available? "Yes" : "No";
-            checkBoxInstalled.Checked = available;
+            checkBoxInstalled.Text = NetVersionAvailable? "Yes" : "No";
+            checkBoxInstalled.Checked = NetVersionAvailable;
             
-            if (available) {
+            if (NetVersionAvailable) {
                 buttonInstall.Hide();
                 message2.Hide();
                 checkBoxInstalled.BackColor = System.Drawing.Color.FromArgb(192, 255, 192);
@@ -32,10 +54,13 @@ namespace NetFrameworkChecker {
                 message2.Text = @"Click the install button to start the web installation or install it manually (see links above)";
             }
             
+            listBox1.Items.Clear();
             foreach(var v in NetFrameworkVersion.GetVersionFromRegistry()) {
                 listBox1.Items.Add(v);
             }
         }
+
+        public bool NetVersionAvailable { get; set; }
 
         private void buttonOk_Click(object sender, EventArgs e) {
             Close();
@@ -50,7 +75,39 @@ namespace NetFrameworkChecker {
         }
 
         private void buttonInstall_Click(object sender, EventArgs e) {
-            // D:\Profiles\jcaillon\Downloads\NDP46-KB3045560-Web.exe /passive /promptrestart /showfinalerror /showrmui
+            buttonInstall.Enabled = false;
+            
+            _installer = new NetFrameworkInstaller(NetFrameworkVersion.GetVersionUrl(Start.VersionNeeded, NetFrameworkVersion.InstallerType.Webclient),  Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "dotNetInstaller_v" + Start.VersionNeeded + ".exe"), ProgressHandler, OnCompleteDownload);
+            _installer.Install();
+
+            downloadBar.Show();
+            downloadPercent.Show();
+        }
+
+        private void OnCompleteDownload(NetFrameworkInstaller obj) {
+            downloadBar.Hide();
+            downloadPercent.Hide();
+        }
+
+        private void ProgressHandler(object o, DownloadProgressChangedEventArgs e) {
+            downloadBar.Value = e.ProgressPercentage;
+            downloadPercent.Text = e.ProgressPercentage + @"%";
+        }
+
+        protected override void OnClosing(CancelEventArgs e) {
+            if (!NetVersionAvailable) {
+                var answer = MessageBox.Show(@"SEX : If you choose not to install the required microsoft .net framework," + Environment.NewLine + Environment.NewLine + (!string.IsNullOrEmpty(Start.InitialApplicationName) ? Start.InitialApplicationName : "this application") + @" will either not start or crash unexpectedly!" + Environment.NewLine + Environment.NewLine + @"Make sure to read this message before leaving!", @".net required version unavailable", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2);
+                if (answer == DialogResult.Cancel) {
+                    e.Cancel = true;
+                    return;
+                }
+            }
+
+            if (_installer != null) {
+                _installer.Stop();
+            }
+            _timer.Stop();
+            base.OnClosing(e);
         }
     }
 }

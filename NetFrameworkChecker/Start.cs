@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Forms;
 
 namespace NetFrameworkChecker {
 
@@ -14,9 +15,9 @@ namespace NetFrameworkChecker {
             if (args.Length >= 2) {
                 VersionNeeded = args[1];
             } else {
-                VersionNeeded = "4.6.2";
+                VersionNeeded = "4.7.1";
             }
-
+            
             // 2nd param : if present, do not show the window if version is installed
             if (args.Length >= 3) {
                 InitialApplicationName = args[2];

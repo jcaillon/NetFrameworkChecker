@@ -42,6 +42,9 @@
             this.buttonOk = new System.Windows.Forms.Button();
             this.buttonInstall = new System.Windows.Forms.Button();
             this.message2 = new System.Windows.Forms.Label();
+            this.downloadBar = new System.Windows.Forms.ProgressBar();
+            this.downloadPercent = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // listBox1
@@ -49,17 +52,17 @@
             this.listBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(13, 157);
+            this.listBox1.Location = new System.Drawing.Point(13, 184);
             this.listBox1.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(472, 82);
+            this.listBox1.Size = new System.Drawing.Size(478, 82);
             this.listBox1.TabIndex = 0;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(10, 114);
+            this.label1.Location = new System.Drawing.Point(10, 141);
             this.label1.Margin = new System.Windows.Forms.Padding(0, 7, 0, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(175, 13);
@@ -70,17 +73,17 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(10, 134);
+            this.label3.Location = new System.Drawing.Point(10, 161);
             this.label3.Margin = new System.Windows.Forms.Padding(0, 7, 0, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(185, 13);
+            this.label3.Size = new System.Drawing.Size(254, 13);
             this.label3.TabIndex = 3;
-            this.label3.Text = "(info) List of installed versions :";
+            this.label3.Text = "List of installed versions on your computer :";
             // 
             // neededVersion
             // 
             this.neededVersion.AutoSize = true;
-            this.neededVersion.Location = new System.Drawing.Point(124, 74);
+            this.neededVersion.Location = new System.Drawing.Point(124, 101);
             this.neededVersion.Name = "neededVersion";
             this.neededVersion.Size = new System.Drawing.Size(19, 13);
             this.neededVersion.TabIndex = 5;
@@ -90,7 +93,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(10, 74);
+            this.label4.Location = new System.Drawing.Point(10, 101);
             this.label4.Margin = new System.Windows.Forms.Padding(0, 7, 0, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(111, 13);
@@ -102,7 +105,7 @@
             this.checkBoxInstalled.AutoSize = true;
             this.checkBoxInstalled.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.checkBoxInstalled.Enabled = false;
-            this.checkBoxInstalled.Location = new System.Drawing.Point(188, 113);
+            this.checkBoxInstalled.Location = new System.Drawing.Point(188, 140);
             this.checkBoxInstalled.Name = "checkBoxInstalled";
             this.checkBoxInstalled.Size = new System.Drawing.Size(40, 17);
             this.checkBoxInstalled.TabIndex = 6;
@@ -112,7 +115,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(10, 10);
+            this.label2.Location = new System.Drawing.Point(10, 37);
             this.label2.Margin = new System.Windows.Forms.Padding(0);
             this.label2.Name = "label2";
             this.label2.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
@@ -124,7 +127,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(10, 29);
+            this.label5.Location = new System.Drawing.Point(10, 56);
             this.label5.Margin = new System.Windows.Forms.Padding(0);
             this.label5.Name = "label5";
             this.label5.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
@@ -135,19 +138,19 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(10, 48);
+            this.label6.Location = new System.Drawing.Point(10, 75);
             this.label6.Margin = new System.Windows.Forms.Padding(0);
             this.label6.Name = "label6";
             this.label6.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
-            this.label6.Size = new System.Drawing.Size(261, 19);
+            this.label6.Size = new System.Drawing.Size(306, 19);
             this.label6.TabIndex = 9;
-            this.label6.Text = "It will help you install the needed framework if needed.";
+            this.label6.Text = "It will help you install the needed microsoft framework if needed.";
             // 
             // message
             // 
             this.message.AutoSize = true;
             this.message.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.message.Location = new System.Drawing.Point(10, 269);
+            this.message.Location = new System.Drawing.Point(10, 296);
             this.message.Margin = new System.Windows.Forms.Padding(0);
             this.message.Name = "message";
             this.message.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
@@ -160,7 +163,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(10, 249);
+            this.label8.Location = new System.Drawing.Point(10, 276);
             this.label8.Margin = new System.Windows.Forms.Padding(0, 7, 0, 7);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(100, 13);
@@ -171,7 +174,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(10, 94);
+            this.label9.Location = new System.Drawing.Point(10, 121);
             this.label9.Margin = new System.Windows.Forms.Padding(0, 7, 0, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(199, 13);
@@ -181,7 +184,7 @@
             // linkWeb
             // 
             this.linkWeb.AutoSize = true;
-            this.linkWeb.Location = new System.Drawing.Point(213, 94);
+            this.linkWeb.Location = new System.Drawing.Point(213, 121);
             this.linkWeb.Name = "linkWeb";
             this.linkWeb.Size = new System.Drawing.Size(68, 13);
             this.linkWeb.TabIndex = 13;
@@ -193,7 +196,7 @@
             // 
             this.linkOffline.AutoSize = true;
             this.linkOffline.LinkBehavior = System.Windows.Forms.LinkBehavior.AlwaysUnderline;
-            this.linkOffline.Location = new System.Drawing.Point(310, 94);
+            this.linkOffline.Location = new System.Drawing.Point(310, 121);
             this.linkOffline.Name = "linkOffline";
             this.linkOffline.Size = new System.Drawing.Size(75, 13);
             this.linkOffline.TabIndex = 14;
@@ -204,7 +207,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(287, 94);
+            this.label10.Location = new System.Drawing.Point(287, 121);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(16, 13);
             this.label10.TabIndex = 15;
@@ -213,7 +216,7 @@
             // buttonOk
             // 
             this.buttonOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonOk.Location = new System.Drawing.Point(410, 327);
+            this.buttonOk.Location = new System.Drawing.Point(416, 357);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(75, 23);
             this.buttonOk.TabIndex = 16;
@@ -224,7 +227,7 @@
             // buttonInstall
             // 
             this.buttonInstall.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonInstall.Location = new System.Drawing.Point(258, 327);
+            this.buttonInstall.Location = new System.Drawing.Point(264, 357);
             this.buttonInstall.Name = "buttonInstall";
             this.buttonInstall.Size = new System.Drawing.Size(146, 23);
             this.buttonInstall.TabIndex = 17;
@@ -236,18 +239,50 @@
             // 
             this.message2.AutoSize = true;
             this.message2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.message2.Location = new System.Drawing.Point(10, 288);
+            this.message2.Location = new System.Drawing.Point(10, 315);
             this.message2.Margin = new System.Windows.Forms.Padding(0);
             this.message2.Name = "message2";
             this.message2.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
             this.message2.Size = new System.Drawing.Size(0, 19);
             this.message2.TabIndex = 18;
             // 
+            // downloadBar
+            // 
+            this.downloadBar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.downloadBar.Location = new System.Drawing.Point(13, 357);
+            this.downloadBar.Name = "downloadBar";
+            this.downloadBar.Size = new System.Drawing.Size(171, 23);
+            this.downloadBar.TabIndex = 19;
+            // 
+            // downloadPercent
+            // 
+            this.downloadPercent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.downloadPercent.AutoSize = true;
+            this.downloadPercent.Location = new System.Drawing.Point(190, 362);
+            this.downloadPercent.Name = "downloadPercent";
+            this.downloadPercent.Size = new System.Drawing.Size(15, 13);
+            this.downloadPercent.TabIndex = 20;
+            this.downloadPercent.Text = "%";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(10, 17);
+            this.label7.Margin = new System.Windows.Forms.Padding(0, 7, 0, 7);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(106, 13);
+            this.label7.TabIndex = 21;
+            this.label7.Text = "What is is about?";
+            // 
             // Application
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(498, 363);
+            this.ClientSize = new System.Drawing.Size(504, 393);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.downloadPercent);
+            this.Controls.Add(this.downloadBar);
             this.Controls.Add(this.message2);
             this.Controls.Add(this.buttonInstall);
             this.Controls.Add(this.buttonOk);
@@ -295,6 +330,9 @@
         private System.Windows.Forms.Button buttonOk;
         private System.Windows.Forms.Button buttonInstall;
         private System.Windows.Forms.Label message2;
+        private System.Windows.Forms.ProgressBar downloadBar;
+        private System.Windows.Forms.Label downloadPercent;
+        private System.Windows.Forms.Label label7;
     }
 }
 
