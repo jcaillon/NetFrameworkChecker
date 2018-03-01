@@ -42,6 +42,7 @@ namespace NetFrameworkChecker {
 
             // D:\Profiles\jcaillon\Downloads\NDP46-KB3045560-Web.exe /passive /promptrestart /showfinalerror /showrmui
             try {
+                //Process.Start(_discLocation, "/passive /promptrestart /showfinalerror /showrmui");
                 Process.Start(_discLocation, "");
             } catch (Exception) {
                 //ignored

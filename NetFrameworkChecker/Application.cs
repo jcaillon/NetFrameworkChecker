@@ -19,7 +19,9 @@ namespace NetFrameworkChecker {
         protected override void OnShown(EventArgs e) {
             downloadBar.Hide();
             downloadPercent.Hide();
-            
+
+            MinimumSize = Size;
+
             RefreshUi();
             _timer = new Timer {
                 Interval = 1000
@@ -96,7 +98,7 @@ namespace NetFrameworkChecker {
 
         protected override void OnClosing(CancelEventArgs e) {
             if (!NetVersionAvailable) {
-                var answer = MessageBox.Show(@"SEX : If you choose not to install the required microsoft .net framework," + Environment.NewLine + Environment.NewLine + (!string.IsNullOrEmpty(Start.InitialApplicationName) ? Start.InitialApplicationName : "this application") + @" will either not start or crash unexpectedly!" + Environment.NewLine + Environment.NewLine + @"Make sure to read this message before leaving!", @".net required version unavailable", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2);
+                var answer = MessageBox.Show(@"If you choose not to install the required microsoft .net framework," + Environment.NewLine + (!string.IsNullOrEmpty(Start.InitialApplicationName) ? Start.InitialApplicationName : "this application") + @" will either not start or crash unexpectedly!" + Environment.NewLine + Environment.NewLine + @"SEX : Make sure to read this message before leaving!", @".net required version unavailable", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2);
                 if (answer == DialogResult.Cancel) {
                     e.Cancel = true;
                     return;

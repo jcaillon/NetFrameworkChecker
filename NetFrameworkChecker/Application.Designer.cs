@@ -271,9 +271,9 @@
             this.label7.Location = new System.Drawing.Point(10, 17);
             this.label7.Margin = new System.Windows.Forms.Padding(0, 7, 0, 7);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(106, 13);
+            this.label7.Size = new System.Drawing.Size(117, 13);
             this.label7.TabIndex = 21;
-            this.label7.Text = "What is is about?";
+            this.label7.Text = "What is this about?";
             // 
             // Application
             // 
