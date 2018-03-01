@@ -76,7 +76,7 @@ namespace NetFrameworkChecker {
         /// <returns></returns>
         public static bool IsVersionAvailable(string version) {
             try {
-                return GetVersionFromRegistry().Exists(s => s.StartsWith(version, true, CultureInfo.CurrentCulture));
+                return GetVersionFromRegistry().Exists(s => IsHigherOrEqualVersionThan(s, version));
             } catch (Exception) {
                 return false;
             }
@@ -118,7 +118,7 @@ namespace NetFrameworkChecker {
                         }
                     }
 
-                    _versions.Sort((s, s1) => string.Compare(s, s1, StringComparison.CurrentCultureIgnoreCase));
+                    _versions.Sort((s, s1) => IsHigherVersionThan(s, s1) ? -1 : 1);
                 } catch (Exception) {
                     //ignored
                 }
@@ -145,6 +145,63 @@ namespace NetFrameworkChecker {
             if (releaseKey >= 378389)
                 return "4.5";
             return null;
+        }
+
+        /// <summary>
+        /// Compares two version string "1.0.0.0".IsHigherVersionThan("0.9") returns true
+        /// Must be STRICTLY superior
+        /// </summary>
+        public static bool IsHigherVersionThan(string localVersion, string distantVersion) {
+            return CompareVersions(localVersion, distantVersion, false);
+        }
+
+        /// <summary>
+        /// Compares two version string "1.0.0.0".IsHigherVersionThan("0.9") returns true
+        /// </summary>
+        public static bool IsHigherOrEqualVersionThan(string localVersion, string distantVersion) {
+            return CompareVersions(localVersion, distantVersion, true);
+        }
+
+        /// <summary>
+        /// Returns true if local >(=) distant
+        /// </summary>
+        /// <returns></returns>
+        private static bool CompareVersions(string localVersion, string distantVersion, bool trueIfEqual) {
+            try {
+                var splitLocal = new List<int>();
+                foreach (var split in localVersion.TrimStart('v').Split('.')) {
+                    splitLocal.Add(int.Parse(split.Trim()));
+                }
+                var splitDistant = new List<int>();
+                foreach (var split in distantVersion.TrimStart('v').Split('.')) {
+                    splitDistant.Add(int.Parse(split.Trim()));
+                }
+                var i = 0;
+                while (i <= (splitLocal.Count - 1) && i <= (splitDistant.Count - 1)) {
+                    if (splitLocal[i] > splitDistant[i])
+                        return true;
+                    if (splitLocal[i] < splitDistant[i])
+                        return false;
+                    i++;
+                }
+
+                var sumLocal = 0;
+                foreach (var val in splitLocal) {
+                    sumLocal += val;
+                }
+                var sumDistant = 0;
+                foreach (var val in splitDistant) {
+                    sumLocal += val;
+                }
+
+                if (sumLocal == sumDistant && trueIfEqual)
+                    return true;
+                if (sumLocal > sumDistant)
+                    return true;
+            } catch (Exception) {
+                // would happen if the input strings are incorrect
+            }
+            return false;
         }
     }
 

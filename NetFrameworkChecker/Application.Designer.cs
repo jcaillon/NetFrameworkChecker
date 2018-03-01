@@ -23,6 +23,7 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Application));
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -99,12 +100,14 @@
             // checkBoxInstalled
             // 
             this.checkBoxInstalled.AutoSize = true;
+            this.checkBoxInstalled.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.checkBoxInstalled.Enabled = false;
             this.checkBoxInstalled.Location = new System.Drawing.Point(188, 113);
             this.checkBoxInstalled.Name = "checkBoxInstalled";
             this.checkBoxInstalled.Size = new System.Drawing.Size(40, 17);
             this.checkBoxInstalled.TabIndex = 6;
             this.checkBoxInstalled.Text = "No";
-            this.checkBoxInstalled.UseVisualStyleBackColor = true;
+            this.checkBoxInstalled.UseVisualStyleBackColor = false;
             // 
             // label2
             // 
@@ -263,6 +266,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.listBox1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Application";
             this.Padding = new System.Windows.Forms.Padding(10);
             this.Text = "Form1";

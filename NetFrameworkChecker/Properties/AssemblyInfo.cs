@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("NetFrameworkChecker")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("https://github.com/jcaillon/NetFrameworkChecker")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("LeCavalierCasta")]
 [assembly: AssemblyProduct("NetFrameworkChecker")]

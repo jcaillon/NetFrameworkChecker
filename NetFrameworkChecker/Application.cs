@@ -23,9 +23,13 @@ namespace NetFrameworkChecker {
             if (available) {
                 buttonInstall.Hide();
                 message2.Hide();
+                checkBoxInstalled.BackColor = System.Drawing.Color.FromArgb(192, 255, 192);
             } else {
+                checkBoxInstalled.BackColor = System.Drawing.Color.FromArgb(255, 192, 192);
+                message.BackColor = System.Drawing.Color.FromArgb(255, 192, 192);
+                message2.BackColor = System.Drawing.Color.FromArgb(255, 192, 192);
                 message.Text = @"You do not have the required version of .net installed to run " + (!string.IsNullOrEmpty(Start.InitialApplicationName) ? Start.InitialApplicationName : "this application") + @".";
-                message2.Text = @"Click the install button or install it manually (see web/offline installer links)";
+                message2.Text = @"Click the install button to start the web installation or install it manually (see links above)";
             }
             
             foreach(var v in NetFrameworkVersion.GetVersionFromRegistry()) {
