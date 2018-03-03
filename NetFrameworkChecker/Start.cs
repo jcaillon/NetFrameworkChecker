@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace NetFrameworkChecker {
@@ -10,27 +11,38 @@ namespace NetFrameworkChecker {
         [STAThread]
         static void Main() {
 
-            // 1st param : .net version needed
             var args = Environment.GetCommandLineArgs();
-            if (args.Length >= 2) {
-                VersionNeeded = args[1];
-            } else {
-                VersionNeeded = "4.7.1";
+
+            List<string> arguments = new List<string>(args);
+            if (arguments.Count > 0)
+                arguments.RemoveAt(0);
+
+            // option -ShowOnlyIfNotInstalled : if present, do not show the window if version is installed
+            if (args.Length >= 1) {
+                for (int i = 0; i < arguments.Count; i++) {
+                    if (arguments[i].Equals("-ShowOnlyIfNotInstalled", StringComparison.CurrentCultureIgnoreCase)) {
+                        ShowOnlyIfNotInstalled = true;
+                        arguments.RemoveAt(i);
+                    }
+                }
+            }
+
+            // 1st param : .net version needed
+            if (arguments.Count >= 1) {
+                VersionNeeded = arguments[0];
+                if (!NetFrameworkVersion.IsHigherOrEqualVersionThan(VersionNeeded, "0"))
+                    VersionNeeded = null;
+            } 
+            
+            if (string.IsNullOrEmpty(VersionNeeded)) {
+                VersionNeeded = "4.6.2";
             }
             
             // 2nd param : if present, do not show the window if version is installed
-            if (args.Length >= 3) {
-                InitialApplicationName = args[2];
+            if (arguments.Count >= 2) {
+                InitialApplicationName = arguments[1];
             } else {
                 InitialApplicationName = "3P";
-            }
-
-            // option -ShowOnlyIfNotInstalled : if present, do not show the window if version is installed
-            if (args.Length >= 2) {
-                foreach (var arg in args) {
-                    if (arg.Equals("-ShowOnlyIfNotInstalled", StringComparison.CurrentCultureIgnoreCase))
-                        ShowOnlyIfNotInstalled = true;
-                }
             }
 
             if (ShowOnlyIfNotInstalled && NetFrameworkVersion.IsVersionAvailable(VersionNeeded)) {
