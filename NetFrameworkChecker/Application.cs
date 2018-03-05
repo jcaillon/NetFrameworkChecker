@@ -48,6 +48,8 @@ namespace NetFrameworkChecker {
                 buttonInstall.Hide();
                 message2.Hide();
                 checkBoxInstalled.BackColor = System.Drawing.Color.FromArgb(192, 255, 192);
+                message.BackColor = System.Drawing.Color.FromArgb(192, 255, 192);
+                message.Text = @"You have the required version of .net framework installed, nothing needs to be done!";
             } else {
                 checkBoxInstalled.BackColor = System.Drawing.Color.FromArgb(255, 192, 192);
                 message.BackColor = System.Drawing.Color.FromArgb(255, 192, 192);
