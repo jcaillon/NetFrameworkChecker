@@ -155,41 +155,45 @@ namespace NetFrameworkChecker {
         /// Compares two version string "1.0.0.0".IsHigherVersionThan("0.9") returns true
         /// Must be STRICTLY superior
         /// </summary>
-        public static bool IsHigherVersionThan(string localVersion, string distantVersion) {
-            return CompareVersions(localVersion, distantVersion, false);
+        public static bool IsHigherVersionThan(string localVersion, string requiredVersion) {
+            return CompareVersions(localVersion, requiredVersion, false);
         }
 
         /// <summary>
         /// Compares two version string "1.0.0.0".IsHigherVersionThan("0.9") returns true
         /// </summary>
-        public static bool IsHigherOrEqualVersionThan(string localVersion, string distantVersion) {
-            return CompareVersions(localVersion, distantVersion, true);
+        public static bool IsHigherOrEqualVersionThan(string localVersion, string requiredVersion) {
+            return CompareVersions(localVersion, requiredVersion, true);
         }
 
         /// <summary>
         /// Returns true if local >(=) distant
         /// </summary>
         /// <returns></returns>
-        private static bool CompareVersions(string localVersion, string distantVersion, bool trueIfEqual) {
+        private static bool CompareVersions(string localVersion, string requiredVersion, bool trueIfEqual) {
             try {
                 var splitLocal = new List<int>();
                 foreach (var split in localVersion.TrimStart('v').Split('.')) {
                     splitLocal.Add(int.Parse(split.Trim()));
                 }
                 var splitDistant = new List<int>();
-                foreach (var split in distantVersion.TrimStart('v').Split('.')) {
+                foreach (var split in requiredVersion.TrimStart('v').Split('.')) {
                     splitDistant.Add(int.Parse(split.Trim()));
                 }
 
                 for (int j = splitLocal.Count - 1; j >= 0; j--) {
                     if (splitLocal[j] == 0) {
                         splitLocal.RemoveAt(j);
+                    } else {
+                        break;
                     }
                 }
 
                 for (int j = splitDistant.Count - 1; j >= 0; j--) {
                     if (splitDistant[j] == 0) {
                         splitDistant.RemoveAt(j);
+                    } else {
+                        break;
                     }
                 }
                 var i = 0;

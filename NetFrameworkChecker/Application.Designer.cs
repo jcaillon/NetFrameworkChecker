@@ -133,7 +133,7 @@
             this.label5.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
             this.label5.Size = new System.Drawing.Size(293, 19);
             this.label5.TabIndex = 8;
-            this.label5.Text = "This application is here to check if you fullfill this requirement.";
+            this.label5.Text = "This application is here to check if you fullfill this requirement.\r\n";
             // 
             // label6
             // 

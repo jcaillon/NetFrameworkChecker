@@ -111,5 +111,10 @@ namespace NetFrameworkChecker {
             _timer.Stop();
             base.OnClosing(e);
         }
+
+        private void label_startdownload_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

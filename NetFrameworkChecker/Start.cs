@@ -44,7 +44,7 @@ namespace NetFrameworkChecker {
             } else {
                 InitialApplicationName = "3P";
             }
-
+            
             if (ShowOnlyIfNotInstalled && NetFrameworkVersion.IsVersionAvailable(VersionNeeded)) {
                 System.Windows.Forms.Application.Exit();
                 return;
