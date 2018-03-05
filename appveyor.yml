@@ -1,0 +1,30 @@
+version: '{branch}.{build}'
+image: Visual Studio 2017
+configuration: Release
+platform: Any CPU
+build:
+  project: NetFrameworkChecker.sln
+  verbosity: minimal
+artifacts:
+- path: NetFrameworkChecker\bin\Release\NetFrameworkChecker.exe
+  name: NetFrameworkChecker.exe
+deploy:
+- provider: GitHub
+  tag: $(APPVEYOR_REPO_TAG_NAME)
+  release: $(APPVEYOR_REPO_TAG_NAME)
+  description: Description of the version here :)
+  auth_token:
+    secure: xE+f8rczPCfechI3U6gncyX2HWWVXN96l6RQ+XlVrWo+0YKf32phrXSzQ6WYEGEs
+  artifact: NetFrameworkChecker.exe
+  draft: true
+  prerelease: true
+  force_update: true
+  on:
+    APPVEYOR_REPO_TAG: true
+notifications:
+- provider: Email
+  to:
+  - greenzest@gmail.com
+  on_build_success: true
+  on_build_failure: true
+  on_build_status_changed: false
