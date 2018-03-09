@@ -1,4 +1,8 @@
 version: '{branch}.{build}'
+branches:
+  only:
+  - master
+skip_non_tags: true
 image: Visual Studio 2017
 configuration: Release
 platform: Any CPU
@@ -12,19 +16,16 @@ deploy:
 - provider: GitHub
   tag: $(APPVEYOR_REPO_TAG_NAME)
   release: $(APPVEYOR_REPO_TAG_NAME)
-  description: Description of the version here :)
   auth_token:
-    secure: xE+f8rczPCfechI3U6gncyX2HWWVXN96l6RQ+XlVrWo+0YKf32phrXSzQ6WYEGEs
+    secure: +UhfFNZfG5atUHe3jEzzNklfIo0zUELCmk8XkLuiTFSc+kAv7njiNEVvyB5jVt90f3AYt7yGRVKJGL+/irlz+mTGAvYUGuq/9s2fc2w3HTE=
   artifact: NetFrameworkChecker.exe
-  draft: true
-  prerelease: true
-  force_update: true
+  draft: false
   on:
     APPVEYOR_REPO_TAG: true
 notifications:
 - provider: Email
   to:
   - greenzest@gmail.com
-  on_build_success: true
-  on_build_failure: true
-  on_build_status_changed: false
+  on_build_success: false
+  on_build_failure: false
+  on_build_status_changed: true
