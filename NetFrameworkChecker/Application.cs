@@ -81,7 +81,7 @@ namespace NetFrameworkChecker {
         private void buttonInstall_Click(object sender, EventArgs e) {
             buttonInstall.Enabled = false;
             
-            _installer = new NetFrameworkInstaller(NetFrameworkVersion.GetVersionUrl(Start.VersionNeeded, NetFrameworkVersion.InstallerType.Webclient),  Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "dotNetInstaller_v" + Start.VersionNeeded + ".exe"), ProgressHandler, OnCompleteDownload);
+            _installer = new NetFrameworkInstaller(NetFrameworkVersion.GetVersionUrl(Start.VersionNeeded, NetFrameworkVersion.InstallerType.Webclient),  Path.Combine(Path.GetTempPath(), "dotNetInstaller_v" + Start.VersionNeeded + ".exe"), ProgressHandler, OnCompleteDownload);
             _installer.Install();
 
             downloadBar.Show();
