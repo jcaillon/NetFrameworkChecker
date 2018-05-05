@@ -20,13 +20,13 @@ This program required at least .net 2.0 to run; but betting that your end user h
 
 Example :
 
-`NetFrameworkChecker.exe "4.6.2" "3P" -ShowOnlyIfNotInstalled`
+`NetFrameworkChecker.exe "4.6.1" "3P" -ShowOnlyIfNotInstalled`
 
 ## Technical references 
 
 The list of download links for the different .version is taken from there : 
 
-https://docs.microsoft.com/en-us/dotnet/framework/deployment/deployment-guide-for-developers
+https://docs.microsoft.com/en-us/dotnet/framework/deployment/deployment-guide-for-developers#redistributable-packages
 
 You can find a description of the language history there :
 

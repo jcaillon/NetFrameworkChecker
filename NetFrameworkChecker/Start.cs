@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
 
 namespace NetFrameworkChecker {
 
@@ -35,7 +34,7 @@ namespace NetFrameworkChecker {
             } 
             
             if (string.IsNullOrEmpty(VersionNeeded)) {
-                VersionNeeded = "4.6.2";
+                VersionNeeded = "4.6.1";
             }
             
             // 2nd param : if present, do not show the window if version is installed

@@ -32,6 +32,8 @@ namespace NetFrameworkChecker {
         public static string GetVersionUrl(string version, InstallerType type) {
             if (type == InstallerType.Full) {
                 switch (version) {
+                    case "4.7.2":
+                        return "http://go.microsoft.com/fwlink/?LinkId=863265";
                     case "4.7.1":
                         return "http://go.microsoft.com/fwlink/?LinkId=852104";
                     case "4.7":
@@ -51,6 +53,8 @@ namespace NetFrameworkChecker {
                 }
             } else {
                 switch (version) {
+                    case "4.7.2":
+                        return "http://go.microsoft.com/fwlink/?LinkId=863262";
                     case "4.7.1":
                         return "http://go.microsoft.com/fwlink/?LinkId=852092";
                     case "4.7":
@@ -132,8 +136,10 @@ namespace NetFrameworkChecker {
         }
         
         private static string CheckFor45PlusVersion(int releaseKey) {
+            if (releaseKey >= 461808)
+                return "4.7.2"; // or superior...
             if (releaseKey >= 461308)
-                return "4.7.1"; // or superior...
+                return "4.7.1";
             if (releaseKey >= 460798)
                 return "4.7";
             if (releaseKey >= 394802)
